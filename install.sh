@@ -41,7 +41,8 @@ chmod 755 "$LAUNCHER"
 
 echo
 echo "Installed: $LAUNCHER"
-command -v openconnect >/dev/null || echo "WARNING: openconnect is not installed (e.g. sudo apt install openconnect)"
+# On Debian, openconnect lives in /usr/sbin, which isn't on a normal user's PATH (sudo's is fine).
+PATH="$PATH:/usr/sbin:/sbin" command -v openconnect >/dev/null || echo "WARNING: openconnect is not installed (e.g. sudo apt install openconnect)"
 case ":$PATH:" in
 	*":$BIN_DIR:"*) ;;
 	*) echo "WARNING: $BIN_DIR is not on your PATH; add it to your shell profile." ;;
